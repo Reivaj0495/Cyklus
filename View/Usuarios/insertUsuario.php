@@ -56,7 +56,7 @@
                              <select name="dep_id" id="selectDepartamento" class="form-control" placeholder="">
                     <option disabled selected>Seleccione...</option>
                 <?php
-                    foreach($Departamento as $departamento){
+                    foreach($datos['departamento'] as $departamento){
                         echo "<option value='" . $departamento['dep_id'] . "'>" . $departamento['dep_descripcion'] . "</option>";
                     }
                 ?>
@@ -71,7 +71,7 @@
                         <select name="tip_doc_id" id="selectTipoDocumento" class="form-control">
                     <option disabled selected>Seleccione...</option>
                 <?php
-                    foreach($TipoDo as $documento){
+                    foreach($datos['tipo_documento'] as $documento){
                         echo "<option value='" . $documento['tip_doc_id'] . "'>" . $documento['tip_doc_descripcion'] . "</option>";
                     }
                 ?>
@@ -95,7 +95,7 @@
                        <select name="tip_usu_id" id="tipoUsuario" class="form-control" onchange="campoFicha()">
                           <option disabled selected>Seleccione...</option>
                             <?php
-                                foreach($TipoUsu as $tipousuario){
+                                foreach($datos['tipo_usuario'] as $tipousuario){
                                     echo "<option value='" . $tipousuario['tip_usu_id'] . "'>" . $tipousuario['tip_usu_descripcion'] . "</option>";
                                 }
                             ?>
@@ -114,7 +114,7 @@
                         <select name="rol_id" id="selectTipoDocumento" class="form-control">
                     <option disabled selected>Seleccione...</option>
                 <?php
-                    foreach($Roles as $rol){
+                    foreach($datos['rol'] as $rol){
                         echo "<option value='" . $rol['rol_id'] . "'>" . $rol['rol_descripcion'] . "</option>";
                     }
                 ?>
@@ -129,7 +129,7 @@
                         <select name="cen_id" id="selectTipoDocumento" class="form-control">
                     <option disabled selected>Seleccione...</option>
                 <?php
-                    foreach($Centros as $centro){
+                    foreach($datos['centro'] as $centro){
                         echo "<option value='" . $centro['cen_id'] . "'>" . $centro['cen_descripcion'] . "</option>";
                     }
                 ?>

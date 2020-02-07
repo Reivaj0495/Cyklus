@@ -1,25 +1,14 @@
 <?php
     include_once '../Model/Usuario/UsuarioModel.php';
+    include 'GstUsuario.php';
   
     class UsuarioController{
         
         public function getCrearUsuario(){
             
-             $ObjFuncion = new UsuariosModel();
-             
-             $sqlDep="select * from departamento";
-             $sqlTipD="select * from tipo_documento";
-             $sqlTipU="select * from tipo_usuario";
-             $sqlRol="select * from rol";
-             $sqlCen="select * from centro";
-             
-             $Departamento=$ObjFuncion->consultar($sqlDep);
-             $TipoDo=$ObjFuncion->consultar($sqlTipD);
-             $TipoUsu=$ObjFuncion->consultar($sqlTipU);
-             $Roles=$ObjFuncion->consultar($sqlRol);
-             $Centros=$ObjFuncion->consultar($sqlCen);
-             
-            include '../View/Usuarios/insertUsuario.php';    
+             $ObjFuncion = new GstUsuario();
+             $datos = $ObjFuncion->GstCrearUsuario();
+             include '../View/Usuarios/insertUsuario.php';
         }
         
         public function postCrearUsuario(){
@@ -41,7 +30,7 @@
                 $centro=$_POST['cen_id'];
                 $estado=$_POST['usu_estado'];
             
-               $res=$sqlInsertUsuario="insert into usuario values("."$usu_id,"."$departamento,"."
+                $sqlInsertUsuario="insert into usuario values("."$usu_id,"."$departamento,"."
                     $tipodocumento,"."$tipousuario,"."'$nombre',"."'$contraseña',"."$rol,".""
                     . "'$documento',"."'$celular',"."'$telefono',"."'$correo',"."$centro,"."'$estado')";
            
