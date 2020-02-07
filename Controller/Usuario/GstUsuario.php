@@ -24,7 +24,6 @@
 
 		public function GstPostCrearUsuario(){
 
-			/*
 			$ObjFuncion = new UsuariosModel();
                 
                 $Usuario=$ObjFuncion->autoIncrement('usuario', 'usu_id');
@@ -46,9 +45,9 @@
                     $tipodocumento,"."$tipousuario,"."'$nombre',"."'$contraseña',"."$rol,".""
                     . "'$documento',"."'$celular',"."'$telefono',"."'$correo',"."$centro,"."'$estado')";
 
-                $ObjFuncion->insertar($sqlInsertUsuario);
+                $respuesta = $ObjFuncion->insertar($sqlInsertUsuario);
 
-                */
+               return $respuesta;
 
 		}
 

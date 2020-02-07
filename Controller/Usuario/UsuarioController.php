@@ -4,6 +4,13 @@
   
     class UsuarioController{
         
+        /**
+         * Funcion que consulta la bd y trae la info para crear un nuevo usuario
+         * @category UsuarioController
+         * @package Usuarios
+         * @version 1.0
+         * @author Javier R
+         */
         public function getCrearUsuario(){
             
              $ObjFuncion = new GstUsuario();
@@ -13,30 +20,10 @@
         
         public function postCrearUsuario(){
         
-            $ObjFuncion = new UsuariosModel();
-                
-                $Usuario=$ObjFuncion->autoIncrement('usuario', 'usu_id');
-                $usu_id=$Usuario;
-                $nombre=$_POST['usu_nickname'];
-                $contraseña=$_POST['usu_password'];
-                $celular=$_POST['usu_celular'];
-                $telefono=$_POST['usu_telefono'];
-                $correo=$_POST['usu_email'];
-                $departamento=$_POST['dep_id'];
-                $tipodocumento=$_POST['tip_doc_id'];
-                $documento=$_POST['usu_documento'];
-                $tipousuario=$_POST['tip_usu_id'];
-                $rol=$_POST['rol_id'];
-                $centro=$_POST['cen_id'];
-                $estado=$_POST['usu_estado'];
+            $ObjFuncion = new GstUsuario();
+            $respuesta = $ObjFuncion->GstPostCrearUsuario();
             
-                $sqlInsertUsuario="insert into usuario values("."$usu_id,"."$departamento,"."
-                    $tipodocumento,"."$tipousuario,"."'$nombre',"."'$contraseña',"."$rol,".""
-                    . "'$documento',"."'$celular',"."'$telefono',"."'$correo',"."$centro,"."'$estado')";
-           
-               $RESPUESTA=$ObjFuncion->insertar($sqlInsertUsuario);
-               
-               if($RESPUESTA>0 ){
+            if($respuesta>0 ){
                    $mensaje= "Se Inserto Correctamente";
                echo "<script type='text/javascript'>
                             alert('$mensaje') </script>";
@@ -46,12 +33,12 @@
                echo "<script type='text/javascript'>
                             alert('$mensaje') </script>";
                redirect(getUrl("Usuario","Usuario","getCrearUsuario"));
-               
-                }
+              }
    
         }
         
         public function getEditarUsuario(){
+            
             $ObjFuncion = new UsuariosModel();
             if(isset($_GET['usu_id'])){
                 $usu_id = $_GET['usu_id'];
