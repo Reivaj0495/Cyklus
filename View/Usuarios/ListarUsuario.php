@@ -38,7 +38,6 @@
                 </thead>
                 <tbody>
                     <?php
-
                         foreach($usuario_Bd as $usuario){
                             echo 
                                "<tr>"

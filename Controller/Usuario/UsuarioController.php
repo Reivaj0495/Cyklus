@@ -10,14 +10,23 @@
          * @package Usuarios
          * @version 1.0
          * @author Javier R
-         */
+        */
+
         public function getCrearUsuario(){
             
              $ObjFuncion = new GstUsuario();
              $datos = $ObjFuncion->GstCrearUsuario();
              include '../View/Usuarios/insertUsuario.php';
         }
-        
+
+        /**
+         * Funcion que inserta en la bd la info para crear un nuevo usuario
+         * @category UsuarioController
+         * @package Usuarios
+         * @version 1.0
+         * @author Javier R
+        */
+
         public function postCrearUsuario(){
         
             $ObjFuncion = new GstUsuario();
@@ -39,10 +48,10 @@
         
         public function getEditarUsuario(){
             
+
             $ObjFuncion = new UsuariosModel();
             if(isset($_GET['usu_id'])){
-                $usu_id = $_GET['usu_id'];
-              
+                
              $sql="select * from usuario where usu_id ='".$_GET['usu_id']."'";
              
              $sqlDep="select * from departamento";
@@ -52,15 +61,15 @@
              $sqlTipDUsus="SELECT * FROM usuario, tipo_documento WHERE usuario.tip_doc_id= tipo_documento.tip_doc_id AND usuario.usu_id ='".$_GET['usu_id']."'";
              
              $sqlTipUsuarios="SELECT * FROM tipo_usuario";
-             $sqlTipU = "SELECT * FROM usuario, tipo_usuario WHERE usuario.usu_id = $usu_id AND usuario.tip_usu_id = tipo_usuario.tip_usu_id";
+             $sqlTipU = "SELECT * FROM usuario, tipo_usuario WHERE usuario.usu_id = '".$_GET['usu_id']."' AND usuario.tip_usu_id = tipo_usuario.tip_usu_id";
              
              $sqlRol="select * from rol";
              $sqlR="SELECT usuario.usu_id, usuario.usu_nickname, rol.rol_id, rol.rol_descripcion 
                     from usuario, rol
-                    WHERE usuario.rol_id = rol.rol_id AND usuario.usu_id =".$usu_id;
+                    WHERE usuario.rol_id = rol.rol_id AND usuario.usu_id ='".$_GET['usu_id']."'";
              
              $sqlCentros="select centro.cen_id, centro.cen_descripcion from centro";
-             $sqlCentro="SELECT usuario.usu_id, centro.cen_id, centro.cen_descripcion FROM usuario, centro WHERE usuario.usu_id = $usu_id AND centro.cen_id = usuario.cen_id";
+             $sqlCentro="SELECT usuario.usu_id, centro.cen_id, centro.cen_descripcion FROM usuario, centro WHERE usuario.usu_id = '".$_GET['usu_id']."' AND centro.cen_id = usuario.cen_id";
             
             
             $Usuarios=$ObjFuncion->consultar($sql);
@@ -84,14 +93,12 @@
             include '../View/Usuarios/EditarUsuario.php';
             }
         }
+
         public function postEditarUsuario(){
             $ObjFuncion = new UsuariosModel();
             
-            $_POST['usu_id'];
-        
             if(isset($_POST['usu_id'])){
 
-                $id=$_POST['usu_id'];
                 $nickname=$_POST['usu_nickname'];
                 $password=$_POST['usu_password'];
                 $celular=$_POST['usu_celular'];
@@ -105,9 +112,9 @@
                 $centro=$_POST['cen_id'];
                 
                 
-                $sql="update usuario set usu_id='".$id[0]."',usu_nickname='".$nickname."',usu_password='".$password."',usu_email='".$correo."'"
+                $sql="update usuario set usu_id='".$_POST['usu_id']."',usu_nickname='".$nickname."',usu_password='".$password."',usu_email='".$correo."'"
                         . ",usu_telefono='".$telefono."',usu_celular='".$celular."',dep_id='".$departamento."',tip_doc_id='".$tipo_documento."'"
-                . ",usu_documento='".$documento."',tip_usu_id='".$tipo_usuario."',rol_id='".$rol_id."',cen_id='".$centro."' WHERE usu_id='".$id."'";
+                . ",usu_documento='".$documento."',tip_usu_id='".$tipo_usuario."',rol_id='".$rol_id."',cen_id='".$centro."' WHERE usu_id='".$_POST['usu_id']."'";
                 $update=$ObjFuncion->editar($sql);
                 
                 if($update>0){

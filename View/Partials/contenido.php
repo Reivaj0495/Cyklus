@@ -9,7 +9,7 @@
               <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="tile-stats">
                   <div class="icon"><i class="fa fa-warning" style="color: #fc7323"></i></div>
-                  <div class="count">6</div>
+                  <div class="count">10</div>
                   <h3>Requisitos Pendientes</h3>
                   <!--<p>Lorem ipsum psdea itgum rixt.</p>-->
                 </div>

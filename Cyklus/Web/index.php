@@ -1,7 +1,7 @@
 <?php
        session_start();
              if(isset($_SESSION['usuario'])){
-               $Nombre= $_SESSION['usuario'];
+              $Usuarios$Nombre= $_SESSION['usuario'];
                $id =$_SESSION['id'];
         
         include_once "../Lib/helper.php";
