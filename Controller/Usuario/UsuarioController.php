@@ -15,7 +15,7 @@
         public function getCrearUsuario(){
             
              $ObjFuncion = new GstUsuario();
-             $datos = $ObjFuncion->GstCrearUsuario();
+             $datos = $ObjFuncion->GstConsultarDatos();
              include '../View/Usuarios/insertUsuario.php';
         }
 
@@ -48,50 +48,11 @@
         
         public function getEditarUsuario(){
             
-
-            $ObjFuncion = new UsuariosModel();
-            if(isset($_GET['usu_id'])){
-                
-             $sql="select * from usuario where usu_id ='".$_GET['usu_id']."'";
-             
-             $sqlDep="select * from departamento";
-             $sqlDepID="SELECT * FROM usuario, departamento WHERE usuario.dep_id= departamento.dep_id AND usuario.usu_id ='".$_GET['usu_id']."'";
-             
-             $sqlTipD="select * from tipo_documento";
-             $sqlTipDUsus="SELECT * FROM usuario, tipo_documento WHERE usuario.tip_doc_id= tipo_documento.tip_doc_id AND usuario.usu_id ='".$_GET['usu_id']."'";
-             
-             $sqlTipUsuarios="SELECT * FROM tipo_usuario";
-             $sqlTipU = "SELECT * FROM usuario, tipo_usuario WHERE usuario.usu_id = '".$_GET['usu_id']."' AND usuario.tip_usu_id = tipo_usuario.tip_usu_id";
-             
-             $sqlRol="select * from rol";
-             $sqlR="SELECT usuario.usu_id, usuario.usu_nickname, rol.rol_id, rol.rol_descripcion 
-                    from usuario, rol
-                    WHERE usuario.rol_id = rol.rol_id AND usuario.usu_id ='".$_GET['usu_id']."'";
-             
-             $sqlCentros="select centro.cen_id, centro.cen_descripcion from centro";
-             $sqlCentro="SELECT usuario.usu_id, centro.cen_id, centro.cen_descripcion FROM usuario, centro WHERE usuario.usu_id = '".$_GET['usu_id']."' AND centro.cen_id = usuario.cen_id";
-            
-            
-            $Usuarios=$ObjFuncion->consultar($sql);
-            
-            $Departamento=$ObjFuncion->consultar($sqlDep);
-            $DepartamentoID=$ObjFuncion->consultar($sqlDepID);
-            
-            $TipoDo=$ObjFuncion->consultar($sqlTipD);
-            $TipoDoUsuario=$ObjFuncion->consultar($sqlTipDUsus);
-            
-            $TipoUsuarios=$ObjFuncion->consultar($sqlTipUsuarios);
-            $TipoUsu=$ObjFuncion->consultar($sqlTipU);
-            
-            $Roles=$ObjFuncion->consultar($sqlRol);
-            $Rol=$ObjFuncion->consultar($sqlR);
-            
-            $Centros=$ObjFuncion->consultar($sqlCentros);
-            $Centro=$ObjFuncion->consultar($sqlCentro);
-            
-            
+            $ObjFuncion = new GstUsuario();
+            $info = $ObjFuncion->GstConsultarDatos();
+            $datosUsuario = $ObjFuncion->GstgetEditarUsuario($_GET['usu_id']);
             include '../View/Usuarios/EditarUsuario.php';
-            }
+        
         }
 
         public function postEditarUsuario(){
