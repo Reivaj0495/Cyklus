@@ -30,28 +30,25 @@
                   <li>
                       <a href="index.php"><i class="fa fa-home"></i> Inicio</a>
                   </li>
+                  
                   <li><a><i class="fa fa-edit"></i> Proyecto <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                         <li><a href="<?php echo getUrl("Proyecto", "Proyecto", "getElegir");?>">Registrar proyecto</a></li> 
-
                         <li><a href="<?php echo getUrl("Proyecto", "Proyecto", "getProyecto") ?>">Listar proyectos</a></li>
-                      
                     </ul>
                   </li>
-                <li><a><i class="fa fa-desktop"></i> Requisitos <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
 
-                      <li><a href="<?php echo getUrl("Requisito", "Requisito", "CrearRequisitos") ?>">Crear requisito</a></li>
-                      
-                        <li><a href="<?php echo getUrl("Requisito", "Requisito", "getRequisitos") ?>">Listar Requisitos</a></li>
-                        
-
-                      <li><a href="inbox.html">Generar informe</a></li>
-                    </ul>
-                  </li>
+                    <li>
+                      <a><i class="fa fa-desktop"></i> Requisitos <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                          <li><a href="<?php echo getUrl("Requisito", "Requisito", "CrearRequisitos") ?>">Crear requisito</a></li>
+                          <li><a href="<?php echo getUrl("Requisito", "Requisito", "getRequisitos") ?>">Listar Requisitos</a></li>
+                          <li><a href="inbox.html">Generar informe</a></li>
+                        </ul>
+                    </li>
 				
-                  <li><a><i class="fa fa-user"> </i> Usuarios <span class="fa fa-chevron-down"></span></a>
-			<ul class="nav child_menu">
+                  <li><a><i class="fa fa-user"></i> Usuarios <span class="fa fa-chevron-down"></span></a>
+			                  <ul class="nav child_menu">
                             <li><a href="<?php echo getUrl("Usuario", "Usuario", "getCrearUsuario")?>"> Crear Usuario </a></li>
                             <li><a href="<?php echo getUrl("Usuario", "Usuario", "ListarUsuarios")?>"> Listar Usuarios </a></li>
                             <li><a href="<?php echo getUrl("Usuario", "Usuario", "CargaMasiva")?>"> Cargar Usuarios </a></li>
@@ -66,6 +63,7 @@
 
             </div>
             <!-- /sidebar menu -->
+
 
             
           </div>

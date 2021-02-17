@@ -1,9 +1,9 @@
 <?php
 
-$server="127.0.0.1";
-$user="root";
-$pass="";
-$database="proyecto_sena_cyklus";
-$post="3306";
+define('SERVER', "127.0.0.1");
+define('USER', "root");
+define('PASSWORD', "");
+define('DATABASE', "proyecto_sena_cyklus");
+define('PORT', "3306");
 
 ?>

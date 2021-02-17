@@ -21,11 +21,11 @@
 
 	    	$ObjFuncion = new UsuariosModel();
 	        
-	             $dato['departamento'] = $Departamento=$ObjFuncion->consultar($sqlDep);
-	             $dato['tipo_documento'] = $TipoDo=$ObjFuncion->consultar($sqlTipD);
-	             $dato['tipo_usuario'] = $TipoUsu=$ObjFuncion->consultar($sqlTipU);
-	             $dato['rol'] = $Roles=$ObjFuncion->consultar($sqlRol);
-	             $dato['centro'] = $Centros=$ObjFuncion->consultar($sqlCen);
+	             $dato['departamento'] = $Departamento=$ObjFuncion->consultarArray($sqlDep);
+	             $dato['tipo_documento'] = $TipoDo=$ObjFuncion->consultarArray($sqlTipD);
+	             $dato['tipo_usuario'] = $TipoUsu=$ObjFuncion->consultarArray($sqlTipU);
+	             $dato['rol'] = $Roles=$ObjFuncion->consultarArray($sqlRol);
+	             $dato['centro'] = $Centros=$ObjFuncion->consultarArray($sqlCen);
 		      
             return $dato;
 		}
@@ -65,21 +65,13 @@
 				return $respuesta;
 		}
 
+        // Pendiente Maneja un error que no se de donde putas viene !! 
 		public function GstgetEditarUsuario($idUsuario){
 
 			 $ObjFuncion = new UsuariosModel();
-                
-             $sql="select * from usuario where usu_id = '$idUsuario'";
-            
-             $sqlDepID="SELECT * FROM usuario, departamento WHERE usuario.dep_id= departamento.dep_id AND usuario.usu_id ='$idUsuario'";
-             $sqlTipDUsus="SELECT * FROM usuario, tipo_documento WHERE usuario.tip_doc_id= tipo_documento.tip_doc_id AND usuario.usu_id ='$idUsuario'";
-             $sqlTipU = "SELECT * FROM usuario, tipo_usuario WHERE usuario.usu_id = '$idUsuario' AND usuario.tip_usu_id = tipo_usuario.tip_usu_id";
-             $sqlR="SELECT usuario.usu_id, usuario.usu_nickname, rol.rol_id, rol.rol_descripcion 
-                    from usuario, rol
-                    WHERE usuario.rol_id = rol.rol_id AND usuario.usu_id ='$idUsuario'";
-             $sqlCentro="SELECT usuario.usu_id, centro.cen_id, centro.cen_descripcion FROM usuario, centro WHERE usuario.usu_id = '$idUsuario' AND centro.cen_id = usuario.cen_id";
-            
-            $datosUsuario['usuario']=$ObjFuncion->consultarArray($sql);
+
+             $sql="select * from usuario where usu_id = '$idUsuario' ";
+             $datosUsuario = $ObjFuncion->consultarArray($sql);
             return $datosUsuario;
 		}
 

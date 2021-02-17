@@ -1,9 +1,9 @@
 <?php
 session_start();
-include_once '../../Lib/conf/Connection.php';
+include '../../Lib/conf/Connection.php';
 
-         $objConnection= new connection;
-         $conexion=$objConnection->getConnect();
+        $objConnection= new connection;
+        $conexion=$objConnection->getConnect();
 
         $Documento=$_POST['Documento'];
         $Password=$_POST['Contraseña'];

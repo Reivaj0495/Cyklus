@@ -1,5 +1,7 @@
 <?php
 
+include_once 'conf.php';
+
 class connection{
     private $server;
     private $user;
@@ -12,12 +14,20 @@ class connection{
         $this->connect();  
     }
     private function setconnect() {
-        require_once 'conf.php';
-        $this->server=$server;
-        $this->user=$user;
-        $this->pass=$pass;
-        $this->post=$post;
-        $this->database=$database;
+      /*
+        $this->server="127.0.0.1";
+        $this->user="root";
+        $this->pass="";
+        $this->port="3306";
+        $this->database="proyecto_sena_cyklus";
+    
+    */
+        $this->server=SERVER;
+        $this->user=USER;
+        $this->pass=PASSWORD;
+        $this->port=PORT;
+        $this->database=DATABASE;
+      
     }
     
     private function connect() {

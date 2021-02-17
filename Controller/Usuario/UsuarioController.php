@@ -49,7 +49,9 @@
         public function getEditarUsuario(){
             
             $ObjFuncion = new GstUsuario();
+
             $info = $ObjFuncion->GstConsultarDatos();
+            //dd($info);
             $datosUsuario = $ObjFuncion->GstgetEditarUsuario($_GET['usu_id']);
             include '../View/Usuarios/EditarUsuario.php';
         
@@ -69,7 +71,7 @@
                 $tipo_documento=$_POST['tip_doc_id'];
                 $documento=$_POST['usu_documento'];
                 $tipo_usuario=$_POST['tip_usu_id'];
-                echo $rol_id=$_POST['rol_id'];
+                $rol_id=$_POST['rol_id'];
                 $centro=$_POST['cen_id'];
                 
                 
@@ -94,36 +96,69 @@
         public function getEliminarUsuario(){
             
             $ObjFuncion= new UsuariosModel();
-            
-            $id=$_GET['usu_id'];
-            
-            $sql="select * from usuario, rol where usu_id=".$id."AND usuario.rol_id = rol.rol_id";
-            $Buscar=$ObjFuncion->consultar($sql);
-                 
+            $sql="select * from usuario, rol where usu_id= ".$_GET['usu_id']." AND usuario.rol_id = rol.rol_id";
+            $Buscar=$ObjFuncion->consultarArray($sql);
             include '../View/Usuarios/EliminarUsuario.php';
         }
+
+        /*
+            Funcion encargada de eliminar al usuario de la BD en el las tablas Usuario, Aprendiz, Instructor
+        */
         public function postEliminarUsuario(){
-            
             $ObjFuncion = new UsuariosModel();
-            $usu_id=$_POST['usu_id'];
+
+            $tipoUsuario= $this->ConsultarTipoUsuario($_POST['usu_id']);
             
-           $sql="Delete from usuario, instructor, aprendiz where usu_id =".$usu_id;
-           
-            $Eliminar=$ObjFuncion->eliminar($sql);
+            if($tipoUsuario == 'Instructor'){
+              
+              $sql="Delete from instructor where usu_id =".$_POST['usu_id'];
+              $Eliminar=$ObjFuncion->eliminar($sql);
+              
+              if($Eliminar>0){
+                   echo "<script type='text/javascript'>alert('Se elimino Correctamente el Instructor');</script>";
+                  }
+                    else{
+                      echo "<script type='text/javascript'>alert('Ocurrio un error al eliminar el Instructor');</script>";
+                          redirect(getUrl("Usuario", "Usuario", "ListarUsuarios"));
+                  }
+            }elseif($tipoUsuario == 'Aprendiz'){
+                $sql="Delete from aprendiz where usu_id =".$_POST['usu_id'];
                 
+                $Eliminar=$ObjFuncion->eliminar($sql);
+                
+                if($Eliminar>0){
+                   echo "<script type='text/javascript'>alert('Se elimino Correctamente el Aprendiz');</script>";
+                  }
+                    else{
+                      echo "<script type='text/javascript'>alert('Ocurrio un error al Eliminar el Aprendiz');</script>";
+                          redirect(getUrl("Usuario", "Usuario", "ListarUsuarios"));
+                  }
+            }
+            
+            $sql="Delete from usuario where usu_id =".$_POST['usu_id'];
+            $Eliminar=$ObjFuncion->eliminar($sql);
+
             if($Eliminar>0){
              echo "<script type='text/javascript'>alert('Usuario Eliminado exitosamente');</script>";
-
                     redirect(getUrl("Usuario", "Usuario", "ListarUsuarios"));
-
-                }
-                else{
-                    echo "<script type='text/javascript'>alert('Ocurrio un error');</script>";
-
-               //     redirect(getUrl("Usuario", "Usuario", "ListarUsuarios"));
-
-                }
+            }
+            else{
+              echo "<script type='text/javascript'>alert('Ocurrio un error');</script>";
+                    redirect(getUrl("Usuario", "Usuario", "ListarUsuarios"));
+            }
         }
+
+        public function ConsultarTipoUsuario($idUsuario){
+
+            $ObjFuncion= new UsuariosModel();
+            $sql = "select tip_usu_id from usuario where usu_id =".$idUsuario;
+            $idTipUsu = $ObjFuncion->consultarArray($sql);
+            $sql2 = "select tip_usu_descripcion from tipo_usuario where tip_usu_id =".$idTipUsu['0']['0'];
+            $tipoUsuario = $ObjFuncion->consultarArray($sql2);
+            $tipoUsuario['0']['tip_usu_descripcion'];
+            return $tipoUsuario['0']['tip_usu_descripcion'];
+        }
+
 
         public function ListarUsuarios(){
             
